@@ -106,8 +106,8 @@ class User_Status extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id", 
-			"label" 
+			"label", 
+			"id" 
 		];
 	}
 	

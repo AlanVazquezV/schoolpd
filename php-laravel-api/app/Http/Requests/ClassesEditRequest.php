@@ -31,9 +31,7 @@ class ClassesEditRequest extends FormRequest
 				"cycle" => "nullable",
 				"status" => "nullable",
 				"modality" => "nullable",
-				"schedule" => "nullable|numeric",
 				"time" => "nullable",
-				"user" => "nullable",
 				"place" => "nullable|string",
         ];
     }

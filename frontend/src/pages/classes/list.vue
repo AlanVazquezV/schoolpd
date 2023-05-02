@@ -6,13 +6,13 @@
                     <div class="grid justify-content-between align-items-center">
                         <div  class="col " >
                             <div class=" text-2xl text-primary font-bold" >
-                                Classes
+                                Clases
                             </div>
                         </div>
                         <div  class="col-12 md:col-3 " >
                             <template v-if="auth.canView('/classes/add')">
                                 <router-link :to="`/classes/add`">
-                                    <Button label="Add New Classes" icon="pi pi-plus" type="button" class="p-button bg-primary "  />
+                                    <Button label="Agregar nueva clase" icon="pi pi-plus" type="button" class="p-button bg-primary "  />
                                 </router-link>
                             </template>
                         </div>
@@ -45,76 +45,55 @@
                                 <DataTable :lazy="true"   :loading="loading"    v-model:selection="selectedItems"
                                      :value="records" dataKey="id" @sort="onSort($event)" class="" :showGridlines="false" :rowHover="true" responsiveLayout="stack">
                                     <Column selectionMode="multiple" headerStyle="width: 2rem" />
-                                        <Column  field="id" header="Id" >
-                                            <template #body="{data}">
-                                                <router-link :to="`/classes/view/${data.id}`">
-                                                    {{ data.id }}
-                                                </router-link>
-                                            </template>
-                                        </Column>
-                                        <Column  field="name" header="Name" >
+                                        <Column  field="name" header="Nombre" >
                                             <template #body="{data}">
                                                 {{ data.name }}
                                             </template>
                                         </Column>
-                                        <Column  field="description" header="Description" >
+                                        <Column  field="description" header="Descripcion" >
                                             <template #body="{data}">
                                                 {{ data.description }}
                                             </template>
                                         </Column>
                                         <Column  field="banner" header="Banner" >
                                             <template #body="{data}">
-                                                {{ data.banner }}
+                                                <image-viewer image-size="small" image-preview-size="" :src="data.banner" width="50px" height="50px" class="img-fluid" :num-display="1">
+                                                </image-viewer>
                                             </template>
                                         </Column>
-                                        <Column  field="schedule" header="Schedule" >
+                                        <Column  field="time" header="Hora" >
                                             <template #body="{data}">
-                                                {{ data.schedule }}
+                                                {{$utils.humanTime( data.time )}}
                                             </template>
                                         </Column>
-                                        <Column  field="time" header="Time" >
-                                            <template #body="{data}">
-                                                {{ data.time }}
-                                            </template>
-                                        </Column>
-                                        <Column  field="place" header="Place" >
+                                        <Column  field="place" header="Lugar o Url" >
                                             <template #body="{data}">
                                                 {{ data.place }}
                                             </template>
                                         </Column>
-                                        <Column  field="assistance" header="Assistance" >
-                                            <template #body="{data}">
-                                                {{ data.assistance }}
-                                            </template>
-                                        </Column>
-                                        <Column  field="user_name" header="User Name" >
-                                            <template #body="{data}">
-                                                {{ data.user_name }}
-                                            </template>
-                                        </Column>
-                                        <Column  field="user_username" header="User Username" >
+                                        <Column  field="user_username" header="Maestro" >
                                             <template #body="{data}">
                                                 {{ data.user_username }}
                                             </template>
                                         </Column>
-                                        <Column  field="user_mobile" header="User Mobile" >
-                                            <template #body="{data}">
-                                                {{ data.user_mobile }}
-                                            </template>
-                                        </Column>
-                                        <Column  field="classes_status_label" header="Classes Status Label" >
+                                        <Column  field="classes_status_label" header="Estatus" >
                                             <template #body="{data}">
                                                 {{ data.classes_status_label }}
                                             </template>
                                         </Column>
-                                        <Column  field="classes_modality_label" header="Classes Modality Label" >
+                                        <Column  field="classes_modality_label" header="Modalidad" >
                                             <template #body="{data}">
                                                 {{ data.classes_modality_label }}
                                             </template>
                                         </Column>
-                                        <Column  field="cycle_label" header="Cycle Label" >
+                                        <Column  field="cycle_label" header="Ciclo" >
                                             <template #body="{data}">
                                                 {{ data.cycle_label }}
+                                            </template>
+                                        </Column>
+                                        <Column  field="schedule_name_label" header="Horario" >
+                                            <template #body="{data}">
+                                                {{ data.schedule_name_label }}
                                             </template>
                                         </Column>
                                         <Column  headerStyle="width: 2rem" headerClass="text-center">
@@ -173,6 +152,7 @@
 <script setup>
 	import {   toRefs, onMounted } from 'vue';
 	import { usePageStore } from 'src/store/page';
+	import { utils } from 'src/utils';
 	import { useApp } from 'src/composables/app.js';
 	import { useAuth } from 'src/composables/auth';
 	import { useListPage } from 'src/composables/listpage.js';
@@ -308,22 +288,34 @@
 	function getActionMenuModel(data){
 		return [
 		{
-			label: "View",
+			label: "Detalles",
 			to: `/classes/view/${data.id}`,
 			icon: "pi pi-eye",
 			visible: auth.canView('classes/view')
 		},
 		{
-			label: "Edit",
+			label: "Editar",
 			to: `/classes/edit/${data.id}`,
 			icon: "pi pi-pencil",
 			visible: auth.canView('classes/edit')
 		},
 		{
-			label: "Delete",
+			label: "Borrar",
 			command: (event) => { deleteItem(data.id) },
 			icon: "pi pi-trash",
 			visible: auth.canView('classes/delete')
+		},
+		{
+			label: "Reservar",
+			to: `/assistance/add_user_page`,
+			icon: "pi pi-calendar",
+			visible: auth.canView('assistance/add_user_page')
+		},
+		{
+			label: "Lista",
+			to: `/classes/view_assis/${data.id}`,
+			icon: "pi pi-align-justify",
+			visible: auth.canView('classes/view_assis')
 		}
 	]
 	}

@@ -26,7 +26,7 @@ class Classes extends Model
      *
      * @var array
      */
-	protected $fillable = ["name","description","banner","cycle","status","modality","schedule","time","user","place","assistance"];
+	protected $fillable = ["name","description","banner","cycle","status","modality","schedule","time","user","place"];
 	
 
 	/**
@@ -42,18 +42,19 @@ class Classes extends Model
 				classes.banner LIKE ?  OR 
 				classes.time LIKE ?  OR 
 				classes.place LIKE ?  OR 
-				user.name LIKE ?  OR 
 				user.username LIKE ?  OR 
-				user.mobile LIKE ?  OR 
 				classes_status.label LIKE ?  OR 
 				classes_modality.label LIKE ?  OR 
 				cycle.label LIKE ?  OR 
+				schedule_name.label LIKE ?  OR 
+				user.name LIKE ?  OR 
 				user.lastname LIKE ?  OR 
 				user.email LIKE ?  OR 
+				user.mobile LIKE ?  OR 
 				user.password LIKE ? 
 		)';
 		$search_params = [
-			"%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%"
+			"%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%"
 		];
 		//setting search conditions
 		$query->whereRaw($search_condition, $search_params);
@@ -67,24 +68,23 @@ class Classes extends Model
      */
 	public static function listFields(){
 		return [ 
-			"classes.id AS id", 
 			"classes.name AS name", 
 			"classes.description AS description", 
 			"classes.banner AS banner", 
-			"classes.schedule AS schedule", 
 			"classes.time AS time", 
 			"classes.place AS place", 
-			"classes.assistance AS assistance", 
-			"user.name AS user_name", 
 			"user.username AS user_username", 
-			"user.mobile AS user_mobile", 
 			"classes_status.label AS classes_status_label", 
 			"classes_modality.label AS classes_modality_label", 
 			"cycle.label AS cycle_label", 
+			"schedule_name.label AS schedule_name_label", 
+			"classes.id AS id", 
 			"user.id AS user_id", 
 			"classes_status.id AS classes_status_id", 
 			"classes_modality.id AS classes_modality_id", 
-			"cycle.id AS cycle_id" 
+			"cycle.id AS cycle_id", 
+			"schedule_name.id AS schedule_name_id", 
+			"assistance.id AS assistance_id" 
 		];
 	}
 	
@@ -96,24 +96,23 @@ class Classes extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"classes.id AS id", 
 			"classes.name AS name", 
 			"classes.description AS description", 
 			"classes.banner AS banner", 
-			"classes.schedule AS schedule", 
 			"classes.time AS time", 
 			"classes.place AS place", 
-			"classes.assistance AS assistance", 
-			"user.name AS user_name", 
 			"user.username AS user_username", 
-			"user.mobile AS user_mobile", 
 			"classes_status.label AS classes_status_label", 
 			"classes_modality.label AS classes_modality_label", 
 			"cycle.label AS cycle_label", 
+			"schedule_name.label AS schedule_name_label", 
+			"classes.id AS id", 
 			"user.id AS user_id", 
 			"classes_status.id AS classes_status_id", 
 			"classes_modality.id AS classes_modality_id", 
-			"cycle.id AS cycle_id" 
+			"cycle.id AS cycle_id", 
+			"schedule_name.id AS schedule_name_id", 
+			"assistance.id AS assistance_id" 
 		];
 	}
 	
@@ -125,34 +124,23 @@ class Classes extends Model
      */
 	public static function viewFields(){
 		return [ 
-			"classes.id AS id", 
 			"classes.name AS name", 
 			"classes.description AS description", 
-			"classes.banner AS banner", 
-			"classes.cycle AS cycle", 
-			"classes.status AS status", 
-			"classes.modality AS modality", 
-			"classes.schedule AS schedule", 
 			"classes.time AS time", 
-			"classes.user AS user", 
 			"classes.place AS place", 
-			"classes.assistance AS assistance", 
-			"user.id AS user_id", 
-			"user.name AS user_name", 
-			"user.lastname AS user_lastname", 
-			"user.type AS user_type", 
 			"user.username AS user_username", 
-			"user.email AS user_email", 
-			"user.status AS user_status", 
-			"user.schedule AS user_schedule", 
-			"user.mobile AS user_mobile", 
-			"user.image AS user_image", 
-			"classes_status.id AS classes_status_id", 
 			"classes_status.label AS classes_status_label", 
-			"classes_modality.id AS classes_modality_id", 
 			"classes_modality.label AS classes_modality_label", 
+			"cycle.label AS cycle_label", 
+			"schedule_name.label AS schedule_name_label", 
+			"classes.banner AS banner", 
+			"classes.id AS id", 
+			"user.id AS user_id", 
+			"classes_status.id AS classes_status_id", 
+			"classes_modality.id AS classes_modality_id", 
 			"cycle.id AS cycle_id", 
-			"cycle.label AS cycle_label" 
+			"schedule_name.id AS schedule_name_id", 
+			"assistance.id AS assistance_id" 
 		];
 	}
 	
@@ -164,34 +152,23 @@ class Classes extends Model
      */
 	public static function exportViewFields(){
 		return [ 
-			"classes.id AS id", 
 			"classes.name AS name", 
 			"classes.description AS description", 
-			"classes.banner AS banner", 
-			"classes.cycle AS cycle", 
-			"classes.status AS status", 
-			"classes.modality AS modality", 
-			"classes.schedule AS schedule", 
 			"classes.time AS time", 
-			"classes.user AS user", 
 			"classes.place AS place", 
-			"classes.assistance AS assistance", 
-			"user.id AS user_id", 
-			"user.name AS user_name", 
-			"user.lastname AS user_lastname", 
-			"user.type AS user_type", 
 			"user.username AS user_username", 
-			"user.email AS user_email", 
-			"user.status AS user_status", 
-			"user.schedule AS user_schedule", 
-			"user.mobile AS user_mobile", 
-			"user.image AS user_image", 
-			"classes_status.id AS classes_status_id", 
 			"classes_status.label AS classes_status_label", 
-			"classes_modality.id AS classes_modality_id", 
 			"classes_modality.label AS classes_modality_label", 
+			"cycle.label AS cycle_label", 
+			"schedule_name.label AS schedule_name_label", 
+			"classes.banner AS banner", 
+			"classes.id AS id", 
+			"user.id AS user_id", 
+			"classes_status.id AS classes_status_id", 
+			"classes_modality.id AS classes_modality_id", 
 			"cycle.id AS cycle_id", 
-			"cycle.label AS cycle_label" 
+			"schedule_name.id AS schedule_name_id", 
+			"assistance.id AS assistance_id" 
 		];
 	}
 	
@@ -209,11 +186,65 @@ class Classes extends Model
 			"cycle", 
 			"status", 
 			"modality", 
-			"schedule", 
 			"time", 
-			"user", 
 			"place", 
 			"id" 
+		];
+	}
+	
+
+	/**
+     * return viewAssis page fields of the model.
+     * 
+     * @return array
+     */
+	public static function viewAssisFields(){
+		return [ 
+			"classes.name AS name", 
+			"classes.description AS description", 
+			"classes.time AS time", 
+			"classes.place AS place", 
+			"user.username AS user_username", 
+			"classes_status.label AS classes_status_label", 
+			"classes_modality.label AS classes_modality_label", 
+			"cycle.label AS cycle_label", 
+			"schedule_name.label AS schedule_name_label", 
+			"classes.banner AS banner", 
+			"classes.id AS id", 
+			"user.id AS user_id", 
+			"classes_status.id AS classes_status_id", 
+			"classes_modality.id AS classes_modality_id", 
+			"cycle.id AS cycle_id", 
+			"schedule_name.id AS schedule_name_id", 
+			"assistance.id AS assistance_id" 
+		];
+	}
+	
+
+	/**
+     * return exportViewAssis page fields of the model.
+     * 
+     * @return array
+     */
+	public static function exportViewAssisFields(){
+		return [ 
+			"classes.name AS name", 
+			"classes.description AS description", 
+			"classes.time AS time", 
+			"classes.place AS place", 
+			"user.username AS user_username", 
+			"classes_status.label AS classes_status_label", 
+			"classes_modality.label AS classes_modality_label", 
+			"cycle.label AS cycle_label", 
+			"schedule_name.label AS schedule_name_label", 
+			"classes.banner AS banner", 
+			"classes.id AS id", 
+			"user.id AS user_id", 
+			"classes_status.id AS classes_status_id", 
+			"classes_modality.id AS classes_modality_id", 
+			"cycle.id AS cycle_id", 
+			"schedule_name.id AS schedule_name_id", 
+			"assistance.id AS assistance_id" 
 		];
 	}
 	

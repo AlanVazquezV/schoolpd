@@ -25,7 +25,11 @@ Route::middleware(['auth:api', 'rbac'])->group(function () {
 	Route::get('assistance/view/{rec_id}', 'AssistanceController@view');	
 	Route::post('assistance/add', 'AssistanceController@add');	
 	Route::any('assistance/edit/{rec_id}', 'AssistanceController@edit');	
-	Route::any('assistance/delete/{rec_id}', 'AssistanceController@delete');
+	Route::any('assistance/delete/{rec_id}', 'AssistanceController@delete');	
+	Route::any('assistance/confirmation_page/{rec_id}', 'AssistanceController@confirmation_page');	
+	Route::post('assistance/add_user_page', 'AssistanceController@add_user_page');	
+	Route::get('assistance/list_class', 'AssistanceController@list_class');
+	Route::get('assistance/list_class/{filter?}/{filtervalue?}', 'AssistanceController@list_class');
 
 /* routes for Assistance_Confirmation Controller  */	
 	Route::get('assistance_confirmation', 'Assistance_ConfirmationController@index');
@@ -43,7 +47,8 @@ Route::middleware(['auth:api', 'rbac'])->group(function () {
 	Route::get('classes/view/{rec_id}', 'ClassesController@view');	
 	Route::post('classes/add', 'ClassesController@add');	
 	Route::any('classes/edit/{rec_id}', 'ClassesController@edit');	
-	Route::any('classes/delete/{rec_id}', 'ClassesController@delete');
+	Route::any('classes/delete/{rec_id}', 'ClassesController@delete');	
+	Route::get('classes/view_assis/{rec_id}', 'ClassesController@view_assis');
 
 /* routes for Classes_Modality Controller  */	
 	Route::get('classes_modality', 'Classes_ModalityController@index');
@@ -97,7 +102,8 @@ Route::middleware(['auth:api', 'rbac'])->group(function () {
 	Route::get('schedule_name/view/{rec_id}', 'Schedule_NameController@view');	
 	Route::post('schedule_name/add', 'Schedule_NameController@add');	
 	Route::any('schedule_name/edit/{rec_id}', 'Schedule_NameController@edit');	
-	Route::any('schedule_name/delete/{rec_id}', 'Schedule_NameController@delete');
+	Route::any('schedule_name/delete/{rec_id}', 'Schedule_NameController@delete');	
+	Route::get('schedule_name/view_page_user/{rec_id}', 'Schedule_NameController@view_page_user');
 
 /* routes for User Controller  */	
 	Route::get('user', 'UserController@index');
@@ -140,19 +146,20 @@ Route::get('home', 'HomeController@index');
 	Route::post('auth/forgotpassword', 'AuthController@forgotpassword')->name('password.reset');	
 	Route::post('auth/resetpassword', 'AuthController@resetpassword');
 	
+	Route::get('components_data/classes_option_list/{arg1?}', 'Components_dataController@classes_option_list');	
+	Route::get('components_data/user_option_list/{arg1?}', 'Components_dataController@user_option_list');	
+	Route::get('components_data/confirmation_option_list/{arg1?}', 'Components_dataController@confirmation_option_list');	
 	Route::get('components_data/cycle_option_list/{arg1?}', 'Components_dataController@cycle_option_list');	
 	Route::get('components_data/status_option_list/{arg1?}', 'Components_dataController@status_option_list');	
 	Route::get('components_data/modality_option_list/{arg1?}', 'Components_dataController@modality_option_list');	
-	Route::get('components_data/user_option_list/{arg1?}', 'Components_dataController@user_option_list');	
 	Route::get('components_data/id_option_list/{arg1?}', 'Components_dataController@id_option_list');	
 	Route::get('components_data/name_option_list/{arg1?}', 'Components_dataController@name_option_list');	
-	Route::get('components_data/class_option_list/{arg1?}', 'Components_dataController@class_option_list');	
 	Route::get('components_data/type_option_list/{arg1?}', 'Components_dataController@type_option_list');	
 	Route::get('components_data/user_username_exist/{arg1?}', 'Components_dataController@user_username_exist');	
 	Route::get('components_data/user_email_exist/{arg1?}', 'Components_dataController@user_email_exist');	
 	Route::get('components_data/status_option_list_2/{arg1?}', 'Components_dataController@status_option_list_2');	
 	Route::get('components_data/schedule_option_list/{arg1?}', 'Components_dataController@schedule_option_list');	
-	Route::get('components_data/getcount_user/{arg1?}', 'Components_dataController@getcount_user');
+	Route::get('components_data/schedule_name_option_list/{arg1?}', 'Components_dataController@schedule_name_option_list');
 
 
 /* routes for FileUpload Controller  */	

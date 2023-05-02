@@ -25,15 +25,16 @@ class UserAddRequest extends FormRequest
 		
         return [
             
-				"row.*.lastname" => "nullable|string",
-				"row.*.type" => "nullable",
-				"row.*.username" => "required|string|unique:user,username",
-				"row.*.email" => "required|email|unique:user,email",
-				"row.*.status" => "nullable",
-				"row.*.schedule" => "nullable",
-				"row.*.mobile" => "nullable|string",
-				"row.*.password" => "required|same:confirm_password",
-				"row.*.image" => "nullable",
+				"name" => "nullable|string",
+				"lastname" => "nullable|string",
+				"type" => "nullable",
+				"username" => "required|string|unique:user,username",
+				"email" => "required|email|unique:user,email",
+				"status" => "nullable",
+				"schedule" => "nullable",
+				"mobile" => "nullable|string",
+				"password" => "required|same:confirm_password",
+				"image" => "nullable",
         ];
     }
 

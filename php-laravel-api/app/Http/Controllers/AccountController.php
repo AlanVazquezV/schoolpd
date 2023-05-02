@@ -24,6 +24,9 @@ class AccountController extends Controller{
 	function index(){
 		$rec_id = Auth::id();
 		$query = User::query();
+		$query->join("user_status", "user.status", "=", "user_status.id");
+		$query->join("user_types", "user.type", "=", "user_types.id");
+		$query->join("schedule_name", "user.schedule", "=", "schedule_name.id");
 		$record = $query->findOrFail($rec_id,  User::accountviewFields());
 		return $this->respond($record);
 	}

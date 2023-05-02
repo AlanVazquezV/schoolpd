@@ -54,25 +54,24 @@ class UserController extends Controller
 	
 
 	/**
-     * Insert multiple rows into the database table
+     * Save form record to the table
      * @return \Illuminate\Http\Response
      */
 	function add(UserAddRequest $request){
-		$postdata = $request->all();
-		$records = [];
-		foreach($postdata as &$modeldata){
+		$modeldata = $request->validated();
 		
 		if( array_key_exists("image", $modeldata) ){
 			//move uploaded file from temp directory to destination directory
 			$fileInfo = $this->moveUploadedFiles($modeldata['image'], "image");
 			$modeldata['image'] = $fileInfo['filepath'];
 		}
-			$modeldata['password'] = bcrypt($modeldata['password']);
-			$record = User::create($modeldata);
-			$record->assignRole("ALUMNO"); //set default role for user
-			$records[] = $record;
-		}
-		return $this->respond($records);
+		$modeldata['password'] = bcrypt($modeldata['password']);
+		
+		//save User record
+		$record = User::create($modeldata);
+		$record->assignRole("ALUMNO"); //set default role for user
+		$rec_id = $record->id;
+		return $this->respond($record);
 	}
 	
 

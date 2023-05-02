@@ -33,9 +33,7 @@ class ClassesAddRequest extends FormRequest
 				"modality" => "nullable",
 				"schedule" => "nullable|numeric",
 				"time" => "nullable",
-				"user" => "nullable",
 				"place" => "nullable|string",
-				"assistance" => "nullable|numeric",
         ];
     }
 

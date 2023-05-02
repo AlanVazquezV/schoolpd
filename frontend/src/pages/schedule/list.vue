@@ -6,7 +6,7 @@
                     <div class="grid justify-content-between align-items-center">
                         <div  class="col " >
                             <div class=" text-2xl text-primary font-bold" >
-                                Schedule
+                                Horario con clases
                             </div>
                         </div>
                         <div  class="col-12 md:col-3 " >
@@ -17,112 +17,134 @@
                             </template>
                         </div>
                         <div  class="col-12 md:col-5 lg:col-4 " >
-                            <span class="p-input-icon-left w-full">
-                            <i class="pi pi-search" />
-                            <InputText  placeholder="Search" class="w-full" :value="searchText" @input="debounce(() => { searchText = $event.target.value })"  />
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </template>
-        <section class="page-section " >
-            <div class="container-fluid">
-                <div class="grid ">
-                    <div  class="col comp-grid" >
-                        <div class="flex align-items-center justify-content-around">
-                            <div v-if="searchText" :class="filterTagClass">
-                                Search
-                                <Chip class="font-medium px-2 py-1" removable @remove="clearSearch()">{{ searchText }}</Chip>
-                            </div>
-                        </div>
-                        <div >
-                            <template v-if="showBreadcrumbs && $route.query.tag && !isSubPage">
-                                <Breadcrumb :home="{icon: 'pi pi-home', to: '/schedule'}" :model="pageBreadCrumb" />
-                            </template>
-                            <!-- page records template -->
-                            <div class="page-records"  >
-                                <DataTable :lazy="true"   :loading="loading"    v-model:selection="selectedItems"
-                                     :value="records" dataKey="id" @sort="onSort($event)" class="" :showGridlines="false" :rowHover="true" responsiveLayout="stack">
-                                    <Column selectionMode="multiple" headerStyle="width: 2rem" />
-                                        <Column  field="id" header="Id" >
-                                            <template #body="{data}">
-                                                <router-link :to="`/schedule/view/${data.id}`">
-                                                    {{ data.id }}
-                                                </router-link>
-                                            </template>
-                                        </Column>
-                                        <Column  field="schedule_name_label" header="Schedule Name Label" >
-                                            <template #body="{data}">
-                                                {{ data.schedule_name_label }}
-                                            </template>
-                                        </Column>
-                                        <Column  field="classes_name" header="Classes Name" >
-                                            <template #body="{data}">
-                                                {{ data.classes_name }}
-                                            </template>
-                                        </Column>
-                                        <Column  field="classes_time" header="Classes Time" >
-                                            <template #body="{data}">
-                                                {{ data.classes_time }}
-                                            </template>
-                                        </Column>
-                                        <Column  headerStyle="width: 2rem" headerClass="text-center">
-                                            <template #body="{data}">
-                                                <div class="flex justify-content-end">
-                                                    <SplitButton dropdownIcon="pi pi-bars" class="p-button dropdown-only p-button-text p-button-plain" :model="getActionMenuModel(data)">
-                                                        <i></i>
-                                                    </SplitButton>
-                                                </div>
-                                            </template>
-                                        </Column>
-                                    </DataTable>
+                            <div :class="{ 'card ': !isSubPage }" class="">
+                                <api-data-source @loaded="(response)=> filters.schedule_name.options=response"  api-path="components_data/schedule_name_option_list" >
+                                    <template v-slot="req">
+                                        <div class=" font-bold text-primary" >
+                                            Filter by Name
+                                        </div>
+                                        <div class="mt-2">
+                                            <Dropdown :filter="true" class="w-full"  :loading="req.loading" v-model="filters.schedule_name.value" optionLabel="label" optionValue="value" :options="filters.schedule_name.options" placeholder="Selecciona el horario" >
+                                            <template #option="slotProps">
+                                                <div class="flex align-items-center">
+                                                    <div class="ml-2" v-if="slotProps.option.image">
+                                                        <Avatar :image="$utils.setImgUrl(slotProps.option.image)" />
+                                                        </div>
+                                                        <div>
+                                                            <div>{{ slotProps.option.label }}</div>
+                                                            <div v-if="slotProps.option.caption" class="text-sm text-500">{{ slotProps.option.caption }}</div>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                                </Dropdown>
+                                            </div>
+                                        </template>
+                                    </api-data-source>
                                 </div>
-                                <!-- page loading indicator -->
-                                <template v-if="loading">
-                                </template>
-                                <!-- end of page loading indicator-->
-                                <!-- Empty record -->
-                                <template v-if="pageReady && !records.length">
-                                    <div class="p-3 my-3 text-500 text-lg font-medium text-center">
-                                        No record found
-                                    </div>
-                                </template>
-                                <!-- end of empty record-->
-                                <!-- pagination component-->
-                                <template v-if="showFooter && pageReady">
-                                    <div class="flex justify-content-between align-items-center">
-                                        <div class="flex justify-content-center flex-grow-0">
-                                            <template v-if="auth.canView('schedule/delete')">
-                                                <div v-if="selectedItems.length" class="m-2">
-                                                    <Button @click="deleteItem(selectedItems)" icon="pi pi-trash" class="p-button-danger" title="Delete Selected" />
-                                                </div>
-                                            </template>
-                                        </div>
-                                        <div v-if="paginate && totalPages > 1" class="flex-grow-1">
-                                            <Paginator class="border-none bg-transparent py-3" :first="recordsPosition - 1" @page="(event)=>{pagination.page = event.page + 1}" :rows="pagination.limit" :totalRecords="totalRecords">
-                                                <template #start>
-                                                    <span class="text-sm text-gray-500 px-2">
-                                                    Records <b>{{ recordsPosition }} of {{ totalRecords }}</b>
-                                                    </span>
-                                                </template>
-                                                <template #end>
-                                                </template>
-                                            </Paginator>
-                                        </div>
-                                    </div>
-                                </template>
-                                <!-- end of pagination component-->
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        </main>
+                </section>
+            </template>
+            <section class="page-section " >
+                <div class="container-fluid">
+                    <div class="grid ">
+                        <div  class="col comp-grid" >
+                            <div class="flex align-items-center justify-content-around">
+                                <div v-if="searchText" :class="filterTagClass">
+                                    Search
+                                    <Chip class="font-medium px-2 py-1" removable @remove="clearSearch()">{{ searchText }}</Chip>
+                                </div>
+                                <div v-if="filterHasValue(filters.schedule_name)" :class="filterTagClass">
+                                    Name
+                                    <Chip class="font-medium px-2 py-1" removable @remove="removeFilter(filters.schedule_name)">
+                                    {{ getFilterLabel(filters.schedule_name) }}
+                                    </Chip>
+                                </div>
+                            </div>
+                            <div >
+                                <template v-if="showBreadcrumbs && $route.query.tag && !isSubPage">
+                                    <Breadcrumb :home="{icon: 'pi pi-home', to: '/schedule'}" :model="pageBreadCrumb" />
+                                </template>
+                                <!-- page records template -->
+                                <div class="page-records"  >
+                                    <DataTable :lazy="true"   :loading="loading"    v-model:selection="selectedItems"
+                                         :value="records" dataKey="id" @sort="onSort($event)" class="" :showGridlines="false" :rowHover="true" responsiveLayout="stack">
+                                        <Column selectionMode="multiple" headerStyle="width: 2rem" />
+                                            <Column  field="id" header="Id" >
+                                                <template #body="{data}">
+                                                    <router-link :to="`/schedule/view/${data.id}`">
+                                                        {{ data.id }}
+                                                    </router-link>
+                                                </template>
+                                            </Column>
+                                            <Column  field="schedule_name_label" header="Schedule Name Label" >
+                                                <template #body="{data}">
+                                                    {{ data.schedule_name_label }}
+                                                </template>
+                                            </Column>
+                                            <Column  field="classes_name" header="Classes Name" >
+                                                <template #body="{data}">
+                                                    {{ data.classes_name }}
+                                                </template>
+                                            </Column>
+                                            <Column  headerStyle="width: 2rem" headerClass="text-center">
+                                                <template #body="{data}">
+                                                    <div class="flex justify-content-end">
+                                                        <SplitButton dropdownIcon="pi pi-bars" class="p-button dropdown-only p-button-text p-button-plain" :model="getActionMenuModel(data)">
+                                                            <i></i>
+                                                        </SplitButton>
+                                                    </div>
+                                                </template>
+                                            </Column>
+                                        </DataTable>
+                                    </div>
+                                    <!-- page loading indicator -->
+                                    <template v-if="loading">
+                                    </template>
+                                    <!-- end of page loading indicator-->
+                                    <!-- Empty record -->
+                                    <template v-if="pageReady && !records.length">
+                                        <div class="p-3 my-3 text-500 text-lg font-medium text-center">
+                                            No record found
+                                        </div>
+                                    </template>
+                                    <!-- end of empty record-->
+                                    <!-- pagination component-->
+                                    <template v-if="showFooter && pageReady">
+                                        <div class="flex justify-content-between align-items-center">
+                                            <div class="flex justify-content-center flex-grow-0">
+                                                <template v-if="auth.canView('schedule/delete')">
+                                                    <div v-if="selectedItems.length" class="m-2">
+                                                        <Button @click="deleteItem(selectedItems)" icon="pi pi-trash" class="p-button-danger" title="Delete Selected" />
+                                                    </div>
+                                                </template>
+                                            </div>
+                                            <div v-if="paginate && totalPages > 1" class="flex-grow-1">
+                                                <Paginator class="border-none bg-transparent py-3" :first="recordsPosition - 1" @page="(event)=>{pagination.page = event.page + 1}" :rows="pagination.limit" :totalRecords="totalRecords">
+                                                    <template #start>
+                                                        <span class="text-sm text-gray-500 px-2">
+                                                        Records <b>{{ recordsPosition }} of {{ totalRecords }}</b>
+                                                        </span>
+                                                    </template>
+                                                    <template #end>
+                                                    </template>
+                                                </Paginator>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <!-- end of pagination component-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
 </template>
 <script setup>
 	import {   toRefs, onMounted } from 'vue';
 	import { usePageStore } from 'src/store/page';
+	import { utils } from 'src/utils';
 	import { useApp } from 'src/composables/app.js';
 	import { useAuth } from 'src/composables/auth';
 	import { useListPage } from 'src/composables/listpage.js';
@@ -233,6 +255,11 @@
 	
 	const defaultStoreState = {
 		filters: {
+			schedule_name: {
+				value: '',
+				valueType: 'single',
+				options: [],
+			}
 		},
 		pagination: {
 			page: props.page,
@@ -253,7 +280,7 @@
 	
 	const {  pageBreadCrumb,   totalPages, recordsPosition, } = page.computedProps;
 	
-	const { load,    exportPage, debounce, clearSearch, onSort,  deleteItem,       } = page.methods;
+	const { load,    exportPage, debounce, clearSearch, onSort,  deleteItem,   removeFilter, getFilterLabel, filterHasValue,  } = page.methods;
 	
 	function getActionMenuModel(data){
 		return [

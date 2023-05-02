@@ -115,40 +115,11 @@
                                         <div class="col-12">
                                             <div class="formgrid grid">
                                                 <div class="col-12 md:col-3">
-                                                    Horario 
-                                                </div>
-                                                <div class="col-12 md:col-9">
-                                                    <InputText  ref="ctrlschedule" v-model.trim="formData.schedule"  label="Horario" type="number" placeholder="Ingresar el horario"   step="any"    
-                                                    class=" w-full" :class="getErrorClass('schedule')">
-                                                    </InputText>
-                                                    <small v-if="isFieldValid('schedule')" class="p-error">{{ getFieldError('schedule') }}</small> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="formgrid grid">
-                                                <div class="col-12 md:col-3">
                                                     Hora de clase 
                                                 </div>
                                                 <div class="col-12 md:col-9">
                                                     <Calendar  :showButtonBar="true" class="w-full" :class="getErrorClass('time')" v-model="formData.time"     :showTime="true" :timeOnly="true"      />
                                                     <small v-if="isFieldValid('time')" class="p-error">{{ getFieldError('time') }}</small> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="formgrid grid">
-                                                <div class="col-12 md:col-3">
-                                                    User 
-                                                </div>
-                                                <div class="col-12 md:col-9">
-                                                    <api-data-source   api-path="components_data/user_option_list" >
-                                                        <template v-slot="req">
-                                                            <Dropdown  class="w-full" :class="getErrorClass('user')"   :loading="req.loading"   optionLabel="label" optionValue="value" ref="ctrluser"  v-model="formData.user" :options="req.response" label="User"  placeholder="Selecciona el profesor de la clase" >
-                                                            </Dropdown> 
-                                                            <small v-if="isFieldValid('user')" class="p-error">{{ getFieldError('user') }}</small> 
-                                                        </template>
-                                                    </api-data-source>
                                                 </div>
                                             </div>
                                         </div>
@@ -265,9 +236,7 @@
 		cycle: "", 
 		status: "", 
 		modality: "", 
-		schedule: "NULL", 
 		time: new Date(), 
-		user: "", 
 		place: "", 
 	}, props.pageData);
 	
@@ -292,9 +261,7 @@
 			cycle: { numeric },
 			status: { numeric },
 			modality: { numeric },
-			schedule: { numeric },
 			time: {  },
-			user: { numeric },
 			place: {  }
 		}
 	});

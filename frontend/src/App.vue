@@ -8,7 +8,7 @@
                     </Button>
                 </div>
                 <router-link to="/" class="layout-topbar-logo flex-grow-none">
-                    <img src="images/logo.png" alt="logo" class="my-5" />
+                    <img src="images/logo.PNG" alt="logo" class="my-5" />
                     <span class="text-white">{{ $appName }}</span>
                 </router-link>
                 <div class="layout-topbar-menu flex-grow-1 justify-content-between">
@@ -42,7 +42,7 @@
                 <template v-else>
                     <div class="layout-topbar bg-primary text-white shadow-7">
                         <router-link to="/" class="layout-topbar-logo">
-                            <img src="images/logo.png" alt="logo" class="my-5" />
+                            <img src="images/logo.PNG" alt="logo" class="my-5" />
                             <span class="text-white">{{ $appName }}</span>
                         </router-link>
                     </div>

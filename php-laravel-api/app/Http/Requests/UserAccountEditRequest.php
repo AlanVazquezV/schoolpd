@@ -27,10 +27,7 @@ class UserAccountEditRequest extends FormRequest
             
 				"name" => "filled|string",
 				"lastname" => "filled|string",
-				"type" => "filled",
 				"username" => "filled|string",
-				"status" => "nullable|numeric",
-				"schedule" => "nullable|numeric",
 				"mobile" => "filled|string",
 				"image" => "nullable",
         ];

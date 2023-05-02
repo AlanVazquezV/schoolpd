@@ -10,7 +10,7 @@
                             </div>
                             <div  class="col " >
                                 <div class=" text-2xl text-primary font-bold" >
-                                    Edit User
+                                    Editar usuario
                                 </div>
                             </div>
                         </div>
@@ -28,10 +28,23 @@
                                         <div class="col-12">
                                             <div class="formgrid grid">
                                                 <div class="col-12 md:col-3">
-                                                    Lastname 
+                                                    Nombre 
                                                 </div>
                                                 <div class="col-12 md:col-9">
-                                                    <InputText  ref="ctrllastname" v-model.trim="formData.lastname"  label="Lastname" type="text" placeholder="Enter Lastname"      
+                                                    <InputText  ref="ctrlname" v-model.trim="formData.name"  label="Nombre" type="text" placeholder="Ingresar nombre"      
+                                                    class=" w-full" :class="getErrorClass('name')">
+                                                    </InputText>
+                                                    <small v-if="isFieldValid('name')" class="p-error">{{ getFieldError('name') }}</small> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="formgrid grid">
+                                                <div class="col-12 md:col-3">
+                                                    Apellido 
+                                                </div>
+                                                <div class="col-12 md:col-9">
+                                                    <InputText  ref="ctrllastname" v-model.trim="formData.lastname"  label="Apellido" type="text" placeholder="Ingresar apellido"      
                                                     class=" w-full" :class="getErrorClass('lastname')">
                                                     </InputText>
                                                     <small v-if="isFieldValid('lastname')" class="p-error">{{ getFieldError('lastname') }}</small> 
@@ -41,27 +54,11 @@
                                         <div class="col-12">
                                             <div class="formgrid grid">
                                                 <div class="col-12 md:col-3">
-                                                    Type 
-                                                </div>
-                                                <div class="col-12 md:col-9">
-                                                    <api-data-source   api-path="components_data/type_option_list" >
-                                                        <template v-slot="req">
-                                                            <Dropdown  class="w-full" :class="getErrorClass('type')"   :loading="req.loading"   optionLabel="label" optionValue="value" ref="ctrltype"  v-model="formData.type" :options="req.response" label="Type"  placeholder="Select a value ..." >
-                                                            </Dropdown> 
-                                                            <small v-if="isFieldValid('type')" class="p-error">{{ getFieldError('type') }}</small> 
-                                                        </template>
-                                                    </api-data-source>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="formgrid grid">
-                                                <div class="col-12 md:col-3">
-                                                    Username *
+                                                    Usuario *
                                                 </div>
                                                 <div class="col-12 md:col-9">
                                                     <check-duplicate v-model="formData.username" check-path="components_data/user_username_exist/" v-slot="checker">
-                                                    <InputText  ref="ctrlusername" @blur="checker.check" :loading="checker.loading" v-model.trim="formData.username"  label="Username" type="text" placeholder="Enter Username"      
+                                                    <InputText  ref="ctrlusername" @blur="checker.check" :loading="checker.loading" v-model.trim="formData.username"  label="Usuario" type="text" placeholder="Ingresar usuario"      
                                                     class=" w-full" :class="getErrorClass('username')">
                                                     </InputText>
                                                     <small v-if="isFieldValid('username')" class="p-error">{{ getFieldError('username') }}</small> 
@@ -74,12 +71,12 @@
                                         <div class="col-12">
                                             <div class="formgrid grid">
                                                 <div class="col-12 md:col-3">
-                                                    Status 
+                                                    Estatus 
                                                 </div>
                                                 <div class="col-12 md:col-9">
                                                     <api-data-source   api-path="components_data/status_option_list_2" >
                                                         <template v-slot="req">
-                                                            <Dropdown  class="w-full" :class="getErrorClass('status')"   :loading="req.loading"   optionLabel="label" optionValue="value" ref="ctrlstatus"  v-model="formData.status" :options="req.response" label="Status"  placeholder="Select a value ..." >
+                                                            <Dropdown  class="w-full" :class="getErrorClass('status')"   :loading="req.loading"   optionLabel="label" optionValue="value" ref="ctrlstatus"  v-model="formData.status" :options="req.response" label="Estatus"  placeholder="Seleccionar estatus ..." >
                                                             </Dropdown> 
                                                             <small v-if="isFieldValid('status')" class="p-error">{{ getFieldError('status') }}</small> 
                                                         </template>
@@ -90,12 +87,12 @@
                                         <div class="col-12">
                                             <div class="formgrid grid">
                                                 <div class="col-12 md:col-3">
-                                                    Schedule 
+                                                    Horario 
                                                 </div>
                                                 <div class="col-12 md:col-9">
                                                     <api-data-source   api-path="components_data/schedule_option_list" >
                                                         <template v-slot="req">
-                                                            <Dropdown  class="w-full" :class="getErrorClass('schedule')"   :loading="req.loading"   optionLabel="label" optionValue="value" ref="ctrlschedule"  v-model="formData.schedule" :options="req.response" label="Schedule"  placeholder="Select a value ..." >
+                                                            <Dropdown  class="w-full" :class="getErrorClass('schedule')"   :loading="req.loading"   optionLabel="label" optionValue="value" ref="ctrlschedule"  v-model="formData.schedule" :options="req.response" label="Horario"  placeholder="Selecciona un horario ..." >
                                                             </Dropdown> 
                                                             <small v-if="isFieldValid('schedule')" class="p-error">{{ getFieldError('schedule') }}</small> 
                                                         </template>
@@ -106,10 +103,10 @@
                                         <div class="col-12">
                                             <div class="formgrid grid">
                                                 <div class="col-12 md:col-3">
-                                                    Mobile 
+                                                    Celular 
                                                 </div>
                                                 <div class="col-12 md:col-9">
-                                                    <InputText  ref="ctrlmobile" v-model.trim="formData.mobile"  label="Mobile" type="text" placeholder="Enter Mobile"      
+                                                    <InputText  ref="ctrlmobile" v-model.trim="formData.mobile"  label="Celular" type="text" placeholder="Ingresar celular"      
                                                     class=" w-full" :class="getErrorClass('mobile')">
                                                     </InputText>
                                                     <small v-if="isFieldValid('mobile')" class="p-error">{{ getFieldError('mobile') }}</small> 
@@ -119,7 +116,7 @@
                                         <div class="col-12">
                                             <div class="formgrid grid">
                                                 <div class="col-12 md:col-3">
-                                                    Image 
+                                                    Imagen 
                                                 </div>
                                                 <div class="col-12 md:col-9">
                                                     <div class="mb-3">
@@ -132,7 +129,7 @@
                                     </div>
                                     <!--[form-content-end]-->
                                     <div v-if="showSubmitButton" class="text-center my-3">
-                                        <Button type="submit" label="Update" icon="pi pi-send" :loading="saving" />
+                                        <Button type="submit" label="Editar" icon="pi pi-send" :loading="saving" />
                                     </div>
                                 </form>
                             </div>
@@ -179,7 +176,7 @@
 		},
 		submitButtonLabel: {
 			type: String,
-			default: "Update",
+			default: "Editar",
 		},
 		formValidationError: {
 			type: String,
@@ -199,7 +196,7 @@
 		},
 		msgAfterSave: {
 			type: String,
-			default: "Record updated successfully",
+			default: "Se ha editado correctamente",
 		},
 		showHeader: {
 			type: Boolean,
@@ -223,12 +220,12 @@
 	const app = useApp();
 	
 	const formDefaultValues = Object.assign({
-		lastname: "NULL", 
-		type: "", 
-		username: "NULL", 
+		name: "", 
+		lastname: "", 
+		username: "", 
 		status: "", 
 		schedule: "", 
-		mobile: "NULL", 
+		mobile: "", 
 		image: "", 
 	}, props.pageData);
 	
@@ -247,8 +244,8 @@
 	// form validation rules
 	const rules = computed(() => {
 		return {
+			name: {  },
 			lastname: {  },
-			type: { numeric },
 			username: { required },
 			status: {  },
 			schedule: { numeric },
@@ -267,7 +264,7 @@
 	const { load, submitForm, getErrorClass, getFieldError, isFieldValid,  } = page.methods;
 	
 	onMounted(()=>{
-		const pageTitle = "Edit User";
+		const pageTitle = "Editar usuario";
 		app.setPageTitle(props.routeName, pageTitle); // set browser page title
 	});
 </script>

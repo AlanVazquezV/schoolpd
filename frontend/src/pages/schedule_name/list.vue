@@ -262,8 +262,14 @@
 		{
 			label: "Delete",
 			command: (event) => { deleteItem(data.id) },
-			icon: "pi pi-trash",
+			icon: "pi pi-align-justify",
 			visible: auth.canView('schedule_name/delete')
+		},
+		{
+			label: "View",
+			to: `/schedule_name/view_page_user/${data.id}`,
+			icon: "pi pi-eye",
+			visible: auth.canView('schedule_name/view_page_user')
 		}
 	]
 	}

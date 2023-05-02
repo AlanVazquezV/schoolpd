@@ -27,6 +27,8 @@ class ClassesController extends Controller
 		$query->join("classes_status", "classes.status", "=", "classes_status.id");
 		$query->join("classes_modality", "classes.modality", "=", "classes_modality.id");
 		$query->join("cycle", "classes.cycle", "=", "cycle.id");
+		$query->join("schedule_name", "classes.schedule", "=", "schedule_name.id");
+		$query->join("assistance", "classes.assistance", "=", "assistance.id");
 		$orderby = $request->orderby ?? "classes.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
@@ -49,6 +51,8 @@ class ClassesController extends Controller
 		$query->join("classes_status", "classes.status", "=", "classes_status.id");
 		$query->join("classes_modality", "classes.modality", "=", "classes_modality.id");
 		$query->join("cycle", "classes.cycle", "=", "cycle.id");
+		$query->join("schedule_name", "classes.schedule", "=", "schedule_name.id");
+		$query->join("assistance", "classes.assistance", "=", "assistance.id");
 		$record = $query->findOrFail($rec_id, Classes::viewFields());
 		return $this->respond($record);
 	}
@@ -66,6 +70,7 @@ class ClassesController extends Controller
 			$fileInfo = $this->moveUploadedFiles($modeldata['banner'], "banner");
 			$modeldata['banner'] = $fileInfo['filepath'];
 		}
+		$modeldata['user'] = auth()->user()->id;
 		
 		//save Classes record
 		$record = Classes::create($modeldata);
@@ -109,5 +114,23 @@ class ClassesController extends Controller
 		$query->whereIn("id", $arr_id);
 		$query->delete();
 		return $this->respond($arr_id);
+	}
+	
+
+	/**
+     * Select table record by ID
+	 * @param string $rec_id
+     * @return \Illuminate\View\View
+     */
+	function view_assis($rec_id = null){
+		$query = Classes::query();
+		$query->join("user", "classes.user", "=", "user.id");
+		$query->join("classes_status", "classes.status", "=", "classes_status.id");
+		$query->join("classes_modality", "classes.modality", "=", "classes_modality.id");
+		$query->join("cycle", "classes.cycle", "=", "cycle.id");
+		$query->join("schedule_name", "classes.schedule", "=", "schedule_name.id");
+		$query->join("assistance", "classes.assistance", "=", "assistance.id");
+		$record = $query->findOrFail($rec_id, Classes::viewAssisFields());
+		return $this->respond($record);
 	}
 }

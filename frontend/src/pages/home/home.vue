@@ -9,33 +9,17 @@
                         </div>
                         <hr class="my-3" />
                     </div>
-                    <div  class="col-12 md:col-3 comp-grid" >
-                        <record-count api-path="components_data/getcount_user" max="" v-slot="record">
-                        <router-link  :to="`/user`">
-                            <div class="card " >
-                                <div class="font-medium text-lg mb-3">User</div>
-                                <div class="flex align-items-center justify-content-between mb-3">
-                                    <div>
-                                        <div class="font-bold text-4xl" v-if="!record.loading">{{ record.num }}</div>
-                                        <ProgressSpinner v-else style="width:20px;height:20px" />
-                                    </div>
-                                    <div style="width:auto;">
-                                        <Avatar icon="pi pi-th-large" size="xlarge" class="" />
-                                        </div>
-                                    </div>
-                                    <div class="text-500 text-sm">Total User</div>
-                                </div>
-                            </router-link>
-                            </record-count>
-                            <div :class="{ 'card ': !isSubPage }" class="">
-                                <NiceImage class="img-fluid" src="images/logo.png"   style="max-width:100%;" />
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </section>
-        </main>
-    
+            </div>
+        </section>
+        <section class="page-section mb-3" >
+            <div class="container-fluid">
+                <div class="grid ">
+                </div>
+            </div>
+        </section>
+    </main>
+
 </template>
 <script setup>
 	import {  ref } from 'vue';

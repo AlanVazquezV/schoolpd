@@ -17,31 +17,38 @@
                     </div>
                 </section>
             </template>
-            <section class="page-section " >
-                <div class="container">
+            <section class="page-section mb-3" >
+                <div class="container-fluid">
                     <div class="grid ">
                         <div  class="col comp-grid" >
-                            <div >
-                                <div class="mb-3 grid justify-content-start">
-                                    <div class="col-12 md:col-4">
-                                        <div class="card flex gap-3 align-items-center p-3 ">
-                                            <div class="">
-                                                <div class="text-400 font-medium mb-1">Id</div>
-                                                <div class="font-bold">{{ item.id }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 md:col-4">
-                                        <div class="card flex gap-3 align-items-center p-3 ">
-                                            <div class="">
-                                                <div class="text-400 font-medium mb-1">Label</div>
-                                                <div class="font-bold">{{ item.label }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class=" text-lg font-bold text-primary" >
+                                Clases que son parte del horario
+                            </div>
+                            <hr class="my-3" />
+                            <div :class="{ 'card ': !isSubPage }" class="">
+                                <div class="">
+                                    <ClassesListPage ref="classesListPage"  :limit="10" field-name="classes.schedule" :field-value="item.id" :show-header="false" :show-breadcrumbs="true" :show-footer="false" :paginate="true" page-store-key="CLASSES_EDIT-CLASSES" is-sub-page>
+                                    </ClassesListPage>
                                 </div>
-                                <div class="flex gap-3 justify-content-start">
-                                    <Menubar class="p-0 inline-menu" ref="actionMenu" :model="getActionMenuModel(item)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="page-section mb-3" >
+                <div class="container-fluid">
+                    <div class="grid ">
+                        <div  class="col-12 comp-grid" >
+                            <div class=" text-lg font-bold text-primary" >
+                                Lista de alumnos inscritos en este horario
+                            </div>
+                            <hr class="my-3" />
+                        </div>
+                        <div  class="col comp-grid" >
+                            <div :class="{ 'card ': !isSubPage }" class="">
+                                <div class="">
+                                    <UserListPage ref="userListPage"  :limit="10" field-name="schedule_name.label" :field-value="item.label" :show-header="false" :show-breadcrumbs="true" :show-footer="false" :paginate="false" page-store-key="CLASSES_EDIT-USER" is-sub-page>
+                                    </UserListPage>
                                 </div>
                             </div>
                         </div>
@@ -63,6 +70,8 @@
 	import { useAuth } from 'src/composables/auth';
 	import { usePageStore } from 'src/store/page';
 	import { useViewPage } from 'src/composables/viewpage.js';
+	import ClassesListPage from "../classes/list.vue";
+import UserListPage from "../user/list.vue";
 	const props = defineProps({
 		id: [String, Number],
 		primaryKey: {

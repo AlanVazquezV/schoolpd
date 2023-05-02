@@ -90,4 +90,16 @@ class Schedule_NameController extends Controller
 		$query->delete();
 		return $this->respond($arr_id);
 	}
+	
+
+	/**
+     * Select table record by ID
+	 * @param string $rec_id
+     * @return \Illuminate\View\View
+     */
+	function view_page_user($rec_id = null){
+		$query = Schedule_Name::query();
+		$record = $query->findOrFail($rec_id, Schedule_Name::viewPageUserFields());
+		return $this->respond($record);
+	}
 }

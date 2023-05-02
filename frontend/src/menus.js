@@ -6,8 +6,8 @@ export const AppMenus = {
 	navbarSideLeftItems: [
   {
     "to": "/home",
-    "label": "Home",
-    "icon": "pi pi-th-large text-primary",
+    "label": "Inicio",
+    "icon": "pi pi-desktop text-primary",
     "iconcolor": "",
     "target": "",
     
@@ -21,33 +21,57 @@ export const AppMenus = {
     
   },
   {
-    "to": "/user_types",
-    "label": "User Types",
-    "icon": "pi pi-th-large text-primary",
-    "iconcolor": "",
-    "target": "",
-    
-  },
-  {
-    "to": "/user_status",
-    "label": "User Status",
-    "icon": "pi pi-th-large text-primary",
-    "iconcolor": "",
-    "target": "",
-    
-  },
-  {
     "to": "/cycle",
-    "label": "Cycle",
+    "label": "Ciclo",
+    "icon": "pi pi-calendar text-primary",
+    "iconcolor": "",
+    "target": "",
+    
+  },
+  {
+    "to": "/classes_viewusuario",
+    "label": "Clases",
     "icon": "pi pi-th-large text-primary",
     "iconcolor": "",
     "target": "",
     
   },
   {
-    "to": "/classes",
-    "label": "Classes",
-    "icon": "pi pi-briefcase text-primary",
+    "to": "/schedule",
+    "label": "Horario con clases",
+    "icon": "pi pi-book text-primary",
+    "iconcolor": "",
+    "target": "",
+    
+  },
+  {
+    "to": "/permissions",
+    "label": "Permissions",
+    "icon": "pi pi-th-large text-primary",
+    "iconcolor": "",
+    "target": "",
+    
+  },
+  {
+    "to": "/assistance_confirmation",
+    "label": "Assistance Confirmation",
+    "icon": "pi pi-th-large text-primary",
+    "iconcolor": "",
+    "target": "",
+    
+  },
+  {
+    "to": "/assistance",
+    "label": "Assistance",
+    "icon": "pi pi-th-large text-primary",
+    "iconcolor": "",
+    "target": "",
+    
+  },
+  {
+    "to": "/schedule_name",
+    "label": "Schedule Name",
+    "icon": "pi pi-th-large text-primary",
     "iconcolor": "",
     "target": "",
     
@@ -69,40 +93,16 @@ export const AppMenus = {
     
   },
   {
-    "to": "/schedule",
-    "label": "Schedule",
-    "icon": "pi pi-list text-primary",
-    "iconcolor": "",
-    "target": "",
-    
-  },
-  {
-    "to": "/schedule_name",
-    "label": "Schedule Name",
+    "to": "/user_status",
+    "label": "User Status",
     "icon": "pi pi-th-large text-primary",
     "iconcolor": "",
     "target": "",
     
   },
   {
-    "to": "/Asiset",
-    "label": "Assistance",
-    "icon": "pi pi-th-large text-primary",
-    "iconcolor": "",
-    "target": "",
-    
-  },
-  {
-    "to": "/assistance_confirmation",
-    "label": "Assistance Confirmation",
-    "icon": "pi pi-th-large text-primary",
-    "iconcolor": "",
-    "target": "",
-    
-  },
-  {
-    "to": "/permissions",
-    "label": "Permissions",
+    "to": "/user_types",
+    "label": "User Types",
     "icon": "pi pi-th-large text-primary",
     "iconcolor": "",
     "target": "",

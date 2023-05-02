@@ -23,7 +23,7 @@
                         <div  class="col comp-grid" >
                             <div class="">
                                 <div class="">
-                                    <ClassesListPage ref="classesListPage"  :limit="10" field-name="cycle.label" :field-value="item.label" :show-header="false" :show-breadcrumbs="true" :show-footer="false" :paginate="true" page-store-key="INDEX-CLASSES" is-sub-page>
+                                    <ClassesListPage ref="classesListPage"  :limit="10" field-name="cycle.label" :field-value="item.label" :show-header="false" :show-breadcrumbs="true" :show-footer="false" :paginate="true" page-store-key="CLASSES_EDIT-CLASSES" is-sub-page>
                                     </ClassesListPage>
                                 </div>
                             </div>

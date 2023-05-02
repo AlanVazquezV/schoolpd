@@ -113,6 +113,32 @@ class Schedule_Name extends Model
 	
 
 	/**
+     * return viewPageUser page fields of the model.
+     * 
+     * @return array
+     */
+	public static function viewPageUserFields(){
+		return [ 
+			"id", 
+			"label" 
+		];
+	}
+	
+
+	/**
+     * return exportViewPageUser page fields of the model.
+     * 
+     * @return array
+     */
+	public static function exportViewPageUserFields(){
+		return [ 
+			"id", 
+			"label" 
+		];
+	}
+	
+
+	/**
      * Indicates if the model should be timestamped.
      *
      * @var bool

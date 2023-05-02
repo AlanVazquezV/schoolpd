@@ -38,6 +38,28 @@ let routes = [
 				props: true
 			},
 		
+			{ 
+				path: '/assistance/confirmation_page/:id', 
+				name: 'assistanceconfirmation_page', 
+				component: () => import('./pages/assistance/confirmation_page.vue'), 
+				props: true
+			},
+		
+			{ 
+				path: '/assistance/add_user_page', 
+				name: 'assistanceadd_user_page', 
+				component: () => import('./pages/assistance/add_user_page.vue'), 
+				props: true
+			},
+	
+			{
+				path: '/assistance/list_class/:index?/:fieldName?/:fieldValue?',
+				name: 'assistancelist_class',
+				component: () => import('./pages/assistance/list_class.vue'), 
+				props: true
+			},
+			
+	
 
 //assistance_confirmation routes
 			{
@@ -97,6 +119,13 @@ let routes = [
 				path: '/classes/edit/:id', 
 				name: 'classesedit', 
 				component: () => import('./pages/classes/edit.vue'), 
+				props: true
+			},
+		
+			{ 
+				path: '/classes/view_assis/:id', 
+				name: 'classesview_assis', 
+				component: () => import('./pages/classes/view_assis.vue'), 
 				props: true
 			},
 		
@@ -286,6 +315,13 @@ let routes = [
 				props: true
 			},
 		
+			{ 
+				path: '/schedule_name/view_page_user/:id', 
+				name: 'schedule_nameview_page_user', 
+				component: () => import('./pages/schedule_name/view_page_user.vue'), 
+				props: true
+			},
+		
 
 //user routes
 			{
@@ -394,6 +430,13 @@ let routes = [
 			},
 		
 
+			{ 
+				path: '/classes_viewusuario', 
+				name: 'classes_viewusuario', 
+				component: () => import('././pages/custom/classes_viewusuario.vue'), 
+				props: true
+			},
+	
 	
 	
 //Password reset routes
@@ -443,10 +486,37 @@ const auth = useAuth();
 	
 	const user = auth.user;
 	if(user){
-		routes.push({ path: '/', alias: '/home', name: 'home', component: () => import(`./pages/home/home.vue`) });
+		const roleName = auth.userRole.toLowerCase();
+		let rolePage;
+		switch(roleName){
+			case "alumno":
+				rolePage = "alumno";
+				break;
+			case "maestro":
+				rolePage = "maestro";
+				break;
+			default:
+				rolePage = "home";
+		}
+		
+		//Dashboard route
+		//Display page based on user role
+		routes.push({
+			path: '/',
+			alias: '/home', 
+			name: 'home', 
+			component: () => import(`./pages/home/${rolePage}.vue`),
+			props: true
+		});
 	}
 	else{
-		routes.push({ path: '/', alias: '/index', name: 'index', component: () => import('./pages/index/index.vue') });
+		routes.push({
+			path: '/', 
+			alias: '/index', 
+			name: 'index', 
+			component: () => import('./pages/index/index.vue'),
+			props: true
+		});
 	}
 
 	const router = createRouter({

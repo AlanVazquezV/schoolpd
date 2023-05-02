@@ -5,6 +5,7 @@ use App\Http\Requests\ScheduleAddRequest;
 use App\Http\Requests\ScheduleEditRequest;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Exception;
 class ScheduleController extends Controller
 {
@@ -30,6 +31,10 @@ class ScheduleController extends Controller
 		$query->orderBy($orderby, $ordertype);
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a single field name
+		}
+		if(!empty($request->schedule_name)){
+			$val = $request->schedule_name;
+			$query->where(DB::raw("schedule.name"), "=", $val);
 		}
 		$records = $this->paginate($query, Schedule::listFields());
 		return $this->respond($records);

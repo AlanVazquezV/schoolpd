@@ -130,8 +130,8 @@ class Cycle extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id", 
-			"label" 
+			"label", 
+			"id" 
 		];
 	}
 	

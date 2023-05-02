@@ -46,7 +46,7 @@
                                                     Class 
                                                 </div>
                                                 <div class="col-12 md:col-9">
-                                                    <api-data-source   api-path="components_data/class_option_list" >
+                                                    <api-data-source   api-path="components_data/classes_option_list" >
                                                         <template v-slot="req">
                                                             <Dropdown  class="w-full" :class="getErrorClass('class')"   :loading="req.loading"   optionLabel="label" optionValue="value" ref="ctrlclass"  v-model="formData.class" :options="req.response" label="Class"  placeholder="Select a value ..." >
                                                             </Dropdown> 

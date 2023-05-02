@@ -63,7 +63,6 @@ class Schedule extends Model
 			"schedule.id AS id", 
 			"schedule_name.label AS schedule_name_label", 
 			"classes.name AS classes_name", 
-			"classes.time AS classes_time", 
 			"schedule_name.id AS schedule_name_id", 
 			"classes.id AS classes_id" 
 		];
@@ -80,7 +79,6 @@ class Schedule extends Model
 			"schedule.id AS id", 
 			"schedule_name.label AS schedule_name_label", 
 			"classes.name AS classes_name", 
-			"classes.time AS classes_time", 
 			"schedule_name.id AS schedule_name_id", 
 			"classes.id AS classes_id" 
 		];

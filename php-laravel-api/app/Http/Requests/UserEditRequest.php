@@ -27,8 +27,8 @@ class UserEditRequest extends FormRequest
 
         return [
             
+				"name" => "nullable|string",
 				"lastname" => "nullable|string",
-				"type" => "nullable",
 				"username" => "filled|string|unique:user,username,$rec_id,id",
 				"status" => "nullable",
 				"schedule" => "nullable",

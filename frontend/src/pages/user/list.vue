@@ -6,20 +6,20 @@
                     <div class="grid justify-content-between align-items-center">
                         <div  class="col " >
                             <div class=" text-2xl text-primary font-bold" >
-                                User
+                                Usuario
                             </div>
                         </div>
                         <div  class="col-12 md:col-3 " >
                             <template v-if="auth.canView('/user/add')">
                                 <router-link :to="`/user/add`">
-                                    <Button label="Add New User" icon="pi pi-plus" type="button" class="p-button bg-primary "  />
+                                    <Button label="Agregar nuevo usuario" icon="pi pi-plus" type="button" class="p-button bg-primary "  />
                                 </router-link>
                             </template>
                         </div>
                         <div  class="col-12 md:col-5 lg:col-4 " >
                             <span class="p-input-icon-left w-full">
                             <i class="pi pi-search" />
-                            <InputText  placeholder="Search" class="w-full" :value="searchText" @input="debounce(() => { searchText = $event.target.value })"  />
+                            <InputText  placeholder="Buscar" class="w-full" :value="searchText" @input="debounce(() => { searchText = $event.target.value })"  />
                             </span>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                                                 {{ data.schedule_name_label }}
                                             </template>
                                         </Column>
-                                        <Column  field="image" header="Image" >
+                                        <Column  field="image" header="Foto" >
                                             <template #body="{data}">
                                                 <image-viewer image-size="small" image-preview-size="" :src="data.image" width="50px" height="50px" class="img-fluid" :num-display="1">
                                                 </image-viewer>
@@ -284,19 +284,19 @@
 	function getActionMenuModel(data){
 		return [
 		{
-			label: "View",
+			label: "Detalles",
 			to: `/user/view/${data.id}`,
 			icon: "pi pi-eye",
 			visible: auth.canView('user/view')
 		},
 		{
-			label: "Edit",
+			label: "Editar",
 			to: `/user/edit/${data.id}`,
 			icon: "pi pi-pencil",
 			visible: auth.canView('user/edit')
 		},
 		{
-			label: "Delete",
+			label: "Eliminar",
 			command: (event) => { deleteItem(data.id) },
 			icon: "pi pi-trash",
 			visible: auth.canView('user/delete')

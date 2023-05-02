@@ -6,7 +6,7 @@
                     <div class="grid justify-content-between align-items-center">
                         <div  class="col " >
                             <div class=" text-2xl text-primary font-bold" >
-                                Assistance
+                                Asistencia
                             </div>
                         </div>
                         <div  class="col-12 md:col-3 " >
@@ -17,10 +17,16 @@
                             </template>
                         </div>
                         <div  class="col-12 md:col-5 lg:col-4 " >
-                            <span class="p-input-icon-left w-full">
-                            <i class="pi pi-search" />
-                            <InputText  placeholder="Search" class="w-full" :value="searchText" @input="debounce(() => { searchText = $event.target.value })"  />
-                            </span>
+                            <div :class="{ 'card ': !isSubPage }" class="">
+                                <div class=" font-bold text-primary" >
+                                    Filter by Date
+                                </div>
+                                <div class="mt-2">
+                                    <Calendar :showIcon="true" :manualInput="false" :showButtonBar="true" dateFormat="yy-mm-dd" hourFormat="24" class="w-full" selectionMode="single" v-model="filters.assistance_date.value" placeholder="Select date"    />
+                                </div>
+                            </div>
+                        </div>
+                        <div  class="col-12 comp-grid" >
                         </div>
                     </div>
                 </div>
@@ -30,12 +36,6 @@
             <div class="container-fluid">
                 <div class="grid ">
                     <div  class="col comp-grid" >
-                        <div class="flex align-items-center justify-content-around">
-                            <div v-if="searchText" :class="filterTagClass">
-                                Search
-                                <Chip class="font-medium px-2 py-1" removable @remove="clearSearch()">{{ searchText }}</Chip>
-                            </div>
-                        </div>
                         <div >
                             <template v-if="showBreadcrumbs && $route.query.tag && !isSubPage">
                                 <Breadcrumb :home="{icon: 'pi pi-home', to: '/assistance'}" :model="pageBreadCrumb" />
@@ -52,24 +52,24 @@
                                                 </router-link>
                                             </template>
                                         </Column>
-                                        <Column  field="classes" header="Classes" >
-                                            <template #body="{data}">
-                                                {{ data.classes }}
-                                            </template>
-                                        </Column>
-                                        <Column  field="user" header="User" >
-                                            <template #body="{data}">
-                                                {{ data.user }}
-                                            </template>
-                                        </Column>
                                         <Column  field="date" header="Date" >
                                             <template #body="{data}">
                                                 {{ data.date }}
                                             </template>
                                         </Column>
-                                        <Column  field="confirmation" header="Confirmation" >
+                                        <Column  field="classes_name" header="Classes Name" >
                                             <template #body="{data}">
-                                                {{ data.confirmation }}
+                                                {{ data.classes_name }}
+                                            </template>
+                                        </Column>
+                                        <Column  field="user_name" header="User Name" >
+                                            <template #body="{data}">
+                                                {{ data.user_name }}
+                                            </template>
+                                        </Column>
+                                        <Column  field="assistance_confirmation_label" header="Assistance Confirmation Label" >
+                                            <template #body="{data}">
+                                                {{ data.assistance_confirmation_label }}
                                             </template>
                                         </Column>
                                         <Column  headerStyle="width: 2rem" headerClass="text-center">
@@ -238,6 +238,11 @@
 	
 	const defaultStoreState = {
 		filters: {
+			assistance_date: {
+				value: '',
+				valueType: 'single-date',
+				options: [],
+			}
 		},
 		pagination: {
 			page: props.page,
@@ -279,6 +284,18 @@
 			command: (event) => { deleteItem(data.id) },
 			icon: "pi pi-trash",
 			visible: auth.canView('assistance/delete')
+		},
+		{
+			label: "Asistencia",
+			command: (event) => { app.openPageDialog({ page:'assistance/confirmation_page', url: `/assistance/confirmation_page/${data.id}`, closeBtn: true }) },
+			icon: "pi pi-check",
+			visible: auth.canView('assistance/confirmation_page')
+		},
+		{
+			label: "Registrar",
+			to: `/assistance/add_user_page`,
+			icon: "pi pi-calendar",
+			visible: auth.canView('assistance/add_user_page')
 		}
 	]
 	}

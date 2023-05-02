@@ -6,7 +6,7 @@
                     <div class="grid justify-content-between align-items-center">
                         <div  class="col " >
                             <div class=" text-2xl text-primary font-bold" >
-                                User Types
+                                Tipos de usuario
                             </div>
                         </div>
                         <div  class="col-12 md:col-3 " >

@@ -31,10 +31,13 @@
                                                     Classes 
                                                 </div>
                                                 <div class="col-12 md:col-9">
-                                                    <InputText  ref="ctrlclasses" v-model.trim="formData.classes"  label="Classes" type="number" placeholder="Enter Classes"   step="any"    
-                                                    class=" w-full" :class="getErrorClass('classes')">
-                                                    </InputText>
-                                                    <small v-if="isFieldValid('classes')" class="p-error">{{ getFieldError('classes') }}</small> 
+                                                    <api-data-source   api-path="components_data/classes_option_list" >
+                                                        <template v-slot="req">
+                                                            <Dropdown  class="w-full" :class="getErrorClass('classes')"   :loading="req.loading"   optionLabel="label" optionValue="value" ref="ctrlclasses"  v-model="formData.classes" :options="req.response" label="Classes"  placeholder="Select a value ..." >
+                                                            </Dropdown> 
+                                                            <small v-if="isFieldValid('classes')" class="p-error">{{ getFieldError('classes') }}</small> 
+                                                        </template>
+                                                    </api-data-source>
                                                 </div>
                                             </div>
                                         </div>
@@ -44,10 +47,13 @@
                                                     User 
                                                 </div>
                                                 <div class="col-12 md:col-9">
-                                                    <InputText  ref="ctrluser" v-model.trim="formData.user"  label="User" type="number" placeholder="Enter User"   step="any"    
-                                                    class=" w-full" :class="getErrorClass('user')">
-                                                    </InputText>
-                                                    <small v-if="isFieldValid('user')" class="p-error">{{ getFieldError('user') }}</small> 
+                                                    <api-data-source   api-path="components_data/user_option_list" >
+                                                        <template v-slot="req">
+                                                            <Dropdown  class="w-full" :class="getErrorClass('user')"   :loading="req.loading"   optionLabel="label" optionValue="value" ref="ctrluser"  v-model="formData.user" :options="req.response" label="User"  placeholder="Select a value ..." >
+                                                            </Dropdown> 
+                                                            <small v-if="isFieldValid('user')" class="p-error">{{ getFieldError('user') }}</small> 
+                                                        </template>
+                                                    </api-data-source>
                                                 </div>
                                             </div>
                                         </div>
@@ -68,10 +74,13 @@
                                                     Confirmation 
                                                 </div>
                                                 <div class="col-12 md:col-9">
-                                                    <InputText  ref="ctrlconfirmation" v-model.trim="formData.confirmation"  label="Confirmation" type="number" placeholder="Enter Confirmation"   step="any"    
-                                                    class=" w-full" :class="getErrorClass('confirmation')">
-                                                    </InputText>
-                                                    <small v-if="isFieldValid('confirmation')" class="p-error">{{ getFieldError('confirmation') }}</small> 
+                                                    <api-data-source   api-path="components_data/confirmation_option_list" >
+                                                        <template v-slot="req">
+                                                            <Dropdown  class="w-full" :class="getErrorClass('confirmation')"   :loading="req.loading"   optionLabel="label" optionValue="value" ref="ctrlconfirmation"  v-model="formData.confirmation" :options="req.response" label="Confirmation"  placeholder="Select a value ..." >
+                                                            </Dropdown> 
+                                                            <small v-if="isFieldValid('confirmation')" class="p-error">{{ getFieldError('confirmation') }}</small> 
+                                                        </template>
+                                                    </api-data-source>
                                                 </div>
                                             </div>
                                         </div>
@@ -99,6 +108,7 @@
 	import {  computed,  reactive, toRefs, onMounted } from 'vue';
 	import { required, numeric, } from 'src/services/validators';
 	import { useApp } from 'src/composables/app.js';
+	import { useAuth } from 'src/composables/auth';
 	import { useEditPage } from 'src/composables/editpage.js';
 	import { usePageStore } from 'src/store/page';
 	const props = defineProps({
@@ -167,12 +177,13 @@
 	
 	const store = usePageStore(props.pageStoreKey);
 	const app = useApp();
+	const auth = useAuth();
 	
 	const formDefaultValues = Object.assign({
-		classes: "NULL", 
-		user: "NULL", 
+		classes: "", 
+		user: auth.userId, 
 		date: "NULL", 
-		confirmation: "NULL", 
+		confirmation: "", 
 	}, props.pageData);
 	
 	const formData = reactive({ ...formDefaultValues });

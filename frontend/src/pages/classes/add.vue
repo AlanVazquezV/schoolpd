@@ -10,7 +10,7 @@
                             </div>
                             <div  class="col " >
                                 <div class=" text-2xl text-primary font-bold" >
-                                    Add New Classes
+                                    Agregar nueva clase
                                 </div>
                             </div>
                         </div>
@@ -138,22 +138,6 @@
                                         <div class="col-12">
                                             <div class="formgrid grid">
                                                 <div class="col-12 md:col-3">
-                                                    User 
-                                                </div>
-                                                <div class="col-12 md:col-9">
-                                                    <api-data-source   api-path="components_data/user_option_list" >
-                                                        <template v-slot="req">
-                                                            <Dropdown  class="w-full" :class="getErrorClass('user')"   :loading="req.loading"   optionLabel="label" optionValue="value" ref="ctrluser"  v-model="formData.user" :options="req.response" label="User"  placeholder="Selecciona el profesor de la clase" >
-                                                            </Dropdown> 
-                                                            <small v-if="isFieldValid('user')" class="p-error">{{ getFieldError('user') }}</small> 
-                                                        </template>
-                                                    </api-data-source>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="formgrid grid">
-                                                <div class="col-12 md:col-3">
                                                     Lugar 
                                                 </div>
                                                 <div class="col-12 md:col-9">
@@ -161,19 +145,6 @@
                                                     class=" w-full" :class="getErrorClass('place')">
                                                     </InputText>
                                                     <small v-if="isFieldValid('place')" class="p-error">{{ getFieldError('place') }}</small> 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="formgrid grid">
-                                                <div class="col-12 md:col-3">
-                                                    Assistance 
-                                                </div>
-                                                <div class="col-12 md:col-9">
-                                                    <InputText  ref="ctrlassistance" v-model.trim="formData.assistance"  label="Assistance" type="number" placeholder="Enter Assistance"   step="any"    
-                                                    class=" w-full" :class="getErrorClass('assistance')">
-                                                    </InputText>
-                                                    <small v-if="isFieldValid('assistance')" class="p-error">{{ getFieldError('assistance') }}</small> 
                                                 </div>
                                             </div>
                                         </div>
@@ -269,11 +240,9 @@
 		cycle: "", 
 		status: "", 
 		modality: "", 
-		schedule: "NULL", 
+		schedule: "", 
 		time: new Date(), 
-		user: "", 
 		place: "", 
-		assistance: "NULL", 
 	};
 	
 	const formData = reactive({ ...formDefaultValues });
@@ -289,9 +258,7 @@
 			modality: { numeric },
 			schedule: { numeric },
 			time: {  },
-			user: { numeric },
-			place: {  },
-			assistance: { numeric }
+			place: {  }
 		}
 	});
 	

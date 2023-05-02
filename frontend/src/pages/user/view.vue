@@ -10,7 +10,7 @@
                             </div>
                             <div  class="col " >
                                 <div class=" text-2xl text-primary font-bold" >
-                                    User Details
+                                    Detalles de usuario
                                 </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                                     <div class="col-12 md:col-4">
                                         <div class="card flex gap-3 align-items-center p-3 ">
                                             <div class="">
-                                                <div class="text-400 font-medium mb-1">Name</div>
+                                                <div class="text-400 font-medium mb-1">Nombre</div>
                                                 <div class="font-bold">{{ item.name }}</div>
                                             </div>
                                         </div>
@@ -42,7 +42,7 @@
                                     <div class="col-12 md:col-4">
                                         <div class="card flex gap-3 align-items-center p-3 ">
                                             <div class="">
-                                                <div class="text-400 font-medium mb-1">Lastname</div>
+                                                <div class="text-400 font-medium mb-1">Apellido</div>
                                                 <div class="font-bold">{{ item.lastname }}</div>
                                             </div>
                                         </div>
@@ -50,7 +50,7 @@
                                     <div class="col-12 md:col-4">
                                         <div class="card flex gap-3 align-items-center p-3 ">
                                             <div class="">
-                                                <div class="text-400 font-medium mb-1">Username</div>
+                                                <div class="text-400 font-medium mb-1">Usuario</div>
                                                 <div class="font-bold">{{ item.username }}</div>
                                             </div>
                                         </div>
@@ -58,7 +58,7 @@
                                     <div class="col-12 md:col-4">
                                         <div class="card flex gap-3 align-items-center p-3 ">
                                             <div class="">
-                                                <div class="text-400 font-medium mb-1">Email</div>
+                                                <div class="text-400 font-medium mb-1">Correo</div>
                                                 <div class="font-bold">{{ item.email }}</div>
                                             </div>
                                         </div>
@@ -66,7 +66,7 @@
                                     <div class="col-12 md:col-4">
                                         <div class="card flex gap-3 align-items-center p-3 ">
                                             <div class="">
-                                                <div class="text-400 font-medium mb-1">Mobile</div>
+                                                <div class="text-400 font-medium mb-1">Telefono</div>
                                                 <div class="font-bold">{{ item.mobile }}</div>
                                             </div>
                                         </div>
@@ -74,7 +74,7 @@
                                     <div class="col-12 md:col-4">
                                         <div class="card flex gap-3 align-items-center p-3 ">
                                             <div class="">
-                                                <div class="text-400 font-medium mb-1">User Status Label</div>
+                                                <div class="text-400 font-medium mb-1">Estatus</div>
                                                 <div class="font-bold">{{ item.user_status_label }}</div>
                                             </div>
                                         </div>
@@ -82,7 +82,7 @@
                                     <div class="col-12 md:col-4">
                                         <div class="card flex gap-3 align-items-center p-3 ">
                                             <div class="">
-                                                <div class="text-400 font-medium mb-1">User Types Label</div>
+                                                <div class="text-400 font-medium mb-1">Tipo</div>
                                                 <div class="font-bold">{{ item.user_types_label }}</div>
                                             </div>
                                         </div>
@@ -90,7 +90,7 @@
                                     <div class="col-12 md:col-4">
                                         <div class="card flex gap-3 align-items-center p-3 ">
                                             <div class="">
-                                                <div class="text-400 font-medium mb-1">Schedule Name Label</div>
+                                                <div class="text-400 font-medium mb-1">Horario</div>
                                                 <div class="font-bold">{{ item.schedule_name_label }}</div>
                                             </div>
                                         </div>
@@ -209,7 +209,7 @@
 	}
 	
 	onMounted(()=>{ 
-		const pageTitle = "User Details";
+		const pageTitle = "Detalles de usuario";
 		app.setPageTitle(props.routeName, pageTitle); // set browser page title
 	});
 	

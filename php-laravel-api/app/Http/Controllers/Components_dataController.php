@@ -15,6 +15,36 @@ class Components_dataController extends Controller{
         $this->middleware('auth:api', ['except' => []]);
     }
 	/**
+     * classes_option_list Model Action
+     * @return array
+     */
+	function classes_option_list(Request $request){
+		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM classes ORDER BY id ASC";
+		$query_params = [];
+		$arr = DB::select(DB::raw($sqltext), $query_params);
+		return $arr;
+	}
+	/**
+     * user_option_list Model Action
+     * @return array
+     */
+	function user_option_list(Request $request){
+		$sqltext = "SELECT  DISTINCT id AS value,username AS label FROM user ORDER BY id ASC";
+		$query_params = [];
+		$arr = DB::select(DB::raw($sqltext), $query_params);
+		return $arr;
+	}
+	/**
+     * confirmation_option_list Model Action
+     * @return array
+     */
+	function confirmation_option_list(Request $request){
+		$sqltext = "SELECT  DISTINCT id AS value,label AS label FROM assistance_confirmation ORDER BY id ASC";
+		$query_params = [];
+		$arr = DB::select(DB::raw($sqltext), $query_params);
+		return $arr;
+	}
+	/**
      * cycle_option_list Model Action
      * @return array
      */
@@ -45,16 +75,6 @@ class Components_dataController extends Controller{
 		return $arr;
 	}
 	/**
-     * user_option_list Model Action
-     * @return array
-     */
-	function user_option_list(Request $request){
-		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM user WHERE user.type = 2 ORDER BY id ASC ";
-		$query_params = [];
-		$arr = DB::select(DB::raw($sqltext), $query_params);
-		return $arr;
-	}
-	/**
      * id_option_list Model Action
      * @return array
      */
@@ -70,16 +90,6 @@ class Components_dataController extends Controller{
      */
 	function name_option_list(Request $request){
 		$sqltext = "SELECT  DISTINCT id AS value,label AS label FROM schedule_name ORDER BY id ASC";
-		$query_params = [];
-		$arr = DB::select(DB::raw($sqltext), $query_params);
-		return $arr;
-	}
-	/**
-     * class_option_list Model Action
-     * @return array
-     */
-	function class_option_list(Request $request){
-		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM classes ORDER BY id ASC";
 		$query_params = [];
 		$arr = DB::select(DB::raw($sqltext), $query_params);
 		return $arr;
@@ -139,13 +149,13 @@ class Components_dataController extends Controller{
 		return $arr;
 	}
 	/**
-     * getcount_user Model Action
-     * @return Value
+     * schedule_name_option_list Model Action
+     * @return array
      */
-	function getcount_user(Request $request){
-		$sqltext = "SELECT COUNT(*) AS num FROM user";
+	function schedule_name_option_list(Request $request){
+		$sqltext = "SELECT  DISTINCT id AS value,label AS label,label AS caption FROM schedule_name ORDER BY label";
 		$query_params = [];
-		$val = DB::select(DB::raw($sqltext), $query_params);
-		return $val[0]->num;
+		$arr = DB::select(DB::raw($sqltext), $query_params);
+		return $arr;
 	}
 }

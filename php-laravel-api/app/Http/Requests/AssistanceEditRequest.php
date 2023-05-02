@@ -25,10 +25,10 @@ class AssistanceEditRequest extends FormRequest
 		
         return [
             
-				"classes" => "nullable|numeric",
-				"user" => "nullable|numeric",
+				"classes" => "nullable",
+				"user" => "nullable",
 				"date" => "nullable|date",
-				"confirmation" => "nullable|numeric",
+				"confirmation" => "nullable",
         ];
     }
 

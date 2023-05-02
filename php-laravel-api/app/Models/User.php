@@ -30,7 +30,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-	protected $fillable = ["name","lastname","type","username","status","schedule","mobile","image","email","password"];
+	protected $fillable = ["name","lastname","username","mobile","image","type","status","schedule","email","password"];
 	/**
      * Table fields which are not included in select statement
      *
@@ -78,13 +78,13 @@ class User extends Authenticatable
 			"user.email AS email", 
 			"user.mobile AS mobile", 
 			"user_status.label AS user_status_label", 
-			"user_types.id AS user_types_id", 
 			"user_types.label AS user_types_label", 
 			"schedule_name.label AS schedule_name_label", 
 			"user.image AS image", 
+			"user.id AS id", 
+			"user_types.id AS user_types_id", 
 			"user_status.id AS user_status_id", 
-			"schedule_name.id AS schedule_name_id", 
-			"user.id AS id" 
+			"schedule_name.id AS schedule_name_id" 
 		];
 	}
 	
@@ -102,13 +102,13 @@ class User extends Authenticatable
 			"user.email AS email", 
 			"user.mobile AS mobile", 
 			"user_status.label AS user_status_label", 
-			"user_types.id AS user_types_id", 
 			"user_types.label AS user_types_label", 
 			"schedule_name.label AS schedule_name_label", 
 			"user.image AS image", 
+			"user.id AS id", 
+			"user_types.id AS user_types_id", 
 			"user_status.id AS user_status_id", 
-			"schedule_name.id AS schedule_name_id", 
-			"user.id AS id" 
+			"schedule_name.id AS schedule_name_id" 
 		];
 	}
 	
@@ -126,12 +126,12 @@ class User extends Authenticatable
 			"user.username AS username", 
 			"user.email AS email", 
 			"user.mobile AS mobile", 
-			"user_status.id AS user_status_id", 
 			"user_status.label AS user_status_label", 
-			"user_types.id AS user_types_id", 
 			"user_types.label AS user_types_label", 
-			"schedule_name.id AS schedule_name_id", 
-			"schedule_name.label AS schedule_name_label" 
+			"schedule_name.label AS schedule_name_label", 
+			"user_status.id AS user_status_id", 
+			"user_types.id AS user_types_id", 
+			"schedule_name.id AS schedule_name_id" 
 		];
 	}
 	
@@ -149,12 +149,12 @@ class User extends Authenticatable
 			"user.username AS username", 
 			"user.email AS email", 
 			"user.mobile AS mobile", 
-			"user_status.id AS user_status_id", 
 			"user_status.label AS user_status_label", 
-			"user_types.id AS user_types_id", 
 			"user_types.label AS user_types_label", 
-			"schedule_name.id AS schedule_name_id", 
-			"schedule_name.label AS schedule_name_label" 
+			"schedule_name.label AS schedule_name_label", 
+			"user_status.id AS user_status_id", 
+			"user_types.id AS user_types_id", 
+			"schedule_name.id AS schedule_name_id" 
 		];
 	}
 	
@@ -168,10 +168,7 @@ class User extends Authenticatable
 		return [ 
 			"name", 
 			"lastname", 
-			"type", 
 			"username", 
-			"status", 
-			"schedule", 
 			"mobile", 
 			"image", 
 			"id" 
@@ -186,15 +183,18 @@ class User extends Authenticatable
      */
 	public static function accountviewFields(){
 		return [ 
-			"id", 
-			"name", 
-			"lastname", 
-			"type", 
-			"username", 
-			"email", 
-			"status", 
-			"schedule", 
-			"mobile" 
+			"user.id AS id", 
+			"user.name AS name", 
+			"user.lastname AS lastname", 
+			"user.username AS username", 
+			"user.email AS email", 
+			"user.mobile AS mobile", 
+			"user_status.label AS user_status_label", 
+			"user_types.label AS user_types_label", 
+			"schedule_name.label AS schedule_name_label", 
+			"user_status.id AS user_status_id", 
+			"user_types.id AS user_types_id", 
+			"schedule_name.id AS schedule_name_id" 
 		];
 	}
 	
@@ -206,15 +206,18 @@ class User extends Authenticatable
      */
 	public static function exportAccountviewFields(){
 		return [ 
-			"id", 
-			"name", 
-			"lastname", 
-			"type", 
-			"username", 
-			"email", 
-			"status", 
-			"schedule", 
-			"mobile" 
+			"user.id AS id", 
+			"user.name AS name", 
+			"user.lastname AS lastname", 
+			"user.username AS username", 
+			"user.email AS email", 
+			"user.mobile AS mobile", 
+			"user_status.label AS user_status_label", 
+			"user_types.label AS user_types_label", 
+			"schedule_name.label AS schedule_name_label", 
+			"user_status.id AS user_status_id", 
+			"user_types.id AS user_types_id", 
+			"schedule_name.id AS schedule_name_id" 
 		];
 	}
 	
@@ -228,7 +231,6 @@ class User extends Authenticatable
 		return [ 
 			"name", 
 			"lastname", 
-			"type", 
 			"username", 
 			"status", 
 			"schedule", 
